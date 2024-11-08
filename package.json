@@ -1,0 +1,36 @@
+{
+	"author": {
+		"name": "Baptiste Pillot",
+		"email": "baptiste@pillot.fr"
+	},
+	"dependencies": {
+		"@itrocks/form-fetch": "latest"
+	},
+	"description": "",
+	"devDependencies": {
+		"@itrocks/prepare-module": "^0.0.8",
+		"@types/node": "^22.9",
+		"typescript": "5.6"
+	},
+	"files": [
+		"LICENSE",
+		"README.md",
+		"*.d.ts",
+		"*.js"
+	],
+	"keywords": [],
+	"license": "LGPL-3.0-or-later",
+	"module": "./xtarget.js",
+	"name": "@itrocks/xtarget",
+	"optionalDependencies": {
+		"@itrocks/build": "latest"
+	},
+	"repository": "https://github.com/itrocks-ts/xtarget",
+	"scripts": {
+		"build": "tsc",
+		"prepare": "prepare-module"
+	},
+	"type": "module",
+	"types": "./xtarget.d.ts",
+	"version": "0.0.1"
+}
