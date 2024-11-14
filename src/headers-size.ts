@@ -1,4 +1,4 @@
-import Plugin             from './plugin.js'
+import Plugin             from '../node_modules/@itrocks/plugin/plugin.js'
 import XTarget            from './xtarget.js'
 import { XTargetElement } from './xtarget.js'
 
@@ -20,8 +20,7 @@ export default class XTargetHeadersSize extends Plugin<XTarget>
 		super(xTarget)
 
 		const superRequestInit = xTarget.requestInit
-
-		xTarget.requestInit = function(element: XTargetElement)
+		xTarget.requestInit    = function(element: XTargetElement)
 		{
 			const requestInit = superRequestInit.call(this, element)
 			if (!requestInit.headers) {

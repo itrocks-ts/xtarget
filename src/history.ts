@@ -1,5 +1,5 @@
 import { formMethod }           from '../node_modules/@itrocks/form-fetch/form-fetch.js'
-import Plugin                   from './plugin.js'
+import Plugin                   from '../node_modules/@itrocks/plugin/plugin.js'
 import { XTarget, xTargetCall } from './xtarget.js'
 
 export default class XTargetHistory extends Plugin<XTarget>

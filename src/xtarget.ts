@@ -1,5 +1,5 @@
 import { formFetchOnSubmit }   from '../node_modules/@itrocks/form-fetch/form-fetch.js'
-import { HasPlugins, Options } from './plugin.js'
+import { HasPlugins, Options } from '../node_modules/@itrocks/plugin/plugin.js'
 
 let defaultOptions = {}
 

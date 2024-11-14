@@ -1,4 +1,4 @@
-import Plugin  from './plugin.js'
+import Plugin  from '../node_modules/@itrocks/plugin/plugin.js'
 import XTarget from './xtarget.js'
 
 export default class XTargetHead extends Plugin<XTarget>

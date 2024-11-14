@@ -1,3 +1,7 @@
+[![view on npm](https://badgen.net/npm/v/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
+[![npm module downloads](https://badgen.net/npm/dt/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
+[![GitHub repo dependents](https://badgen.net/github/dependents-repo/itrocks-ts/xtarget)](https://github.com/itrocks-ts/xtarget/network/dependents?dependent_type=REPOSITORY)
+[![GitHub package dependents](https://badgen.net/github/dependents-pkg/itrocks-ts/xtarget)](https://github.com/itrocks-ts/xtarget/network/dependents?dependent_type=PACKAGE)
 
 # xtarget
 
