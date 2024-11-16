@@ -7,7 +7,7 @@
 		"@itrocks/form-fetch": "latest",
 		"@itrocks/plugin": "latest"
 	},
-	"description": "",
+	"description": "The simplest way to choose any element in your DOM as a target for your anchors and forms",
 	"devDependencies": {
 		"@itrocks/prepare-module": "latest",
 		"@types/node": "^22.9",
@@ -19,7 +19,16 @@
 		"*.d.ts",
 		"*.js"
 	],
-	"keywords": [],
+	"keywords": [
+		"ajax",
+		"anchor",
+		"async",
+		"form",
+		"link",
+		"SPA",
+		"target",
+		"xhr"
+	],
 	"license": "LGPL-3.0-or-later",
 	"module": "./xtarget.js",
 	"name": "@itrocks/xtarget",
@@ -33,5 +42,5 @@
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.2"
+	"version": "0.0.3"
 }

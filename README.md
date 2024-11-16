@@ -5,7 +5,7 @@
 
 # xtarget
 
-Allows you to choose any element in your DOM as a target for your anchors and forms.
+The simplest way to choose any element in your DOM as a target for your anchors and forms.
 
 ## Installation
 
