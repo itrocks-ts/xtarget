@@ -24,6 +24,7 @@
 		"anchor",
 		"async",
 		"form",
+		"it.rocks",
 		"link",
 		"SPA",
 		"target",
@@ -42,5 +43,5 @@
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.3"
+	"version": "0.0.4"
 }
