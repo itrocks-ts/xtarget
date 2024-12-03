@@ -12,14 +12,14 @@ export default class XTargetComposite extends Plugin<XTarget>
 		xTarget.setHTML = function(text, targetSelector)
 		{
 			let global = true
-			while (text.includes('<!-- target ')) {
-				const targetIndex = text.indexOf('<!-- target ') + 12
-				const start       = text.indexOf(' -->', targetIndex) + 4
-				const stop        = text.indexOf('<!-- end -->', start)
+			while (text.includes('<!--#')) {
+				const targetIndex = text.indexOf('<!--#') + 5
+				const start       = text.indexOf('-->', targetIndex) + 3
+				const stop        = text.indexOf('<!--#end-->', start)
 
-				let   localTargetSelector = text.slice(targetIndex, start - 4)
+				let   localTargetSelector = text.slice(targetIndex, start - 3)
 				const localText = text.slice(start, stop)
-				text = text.slice(0, targetIndex - 12) + text.slice(stop + 12)
+				text = text.slice(0, targetIndex - 5) + text.slice(stop + 11)
 				this.setHTML(localText, localTargetSelector)
 
 				if (global && localText.trim().length && document.querySelector(localTargetSelector)) {
