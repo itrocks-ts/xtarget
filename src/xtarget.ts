@@ -83,18 +83,57 @@ export default class XTarget extends HasPlugins<XTarget>
 			}
 		}
 
+		let modifier: string
+		[targetSelector, modifier] = targetSelector.split(':')
 		let target = document.querySelector(targetSelector)
 		if (!target && (targetSelector[0] === '#')) {
 			target = document.createElement('div')
 			target.setAttribute('id', targetSelector.slice(1))
-			target.innerHTML = text
 			document.body.appendChild(target)
 		}
-		else if (target && (global || text.trim().length)) {
-			target.innerHTML = text.trim().length ? text : ''
+
+		if (!target) {
+			return console.error('target not found', targetSelector)
 		}
-		else {
-			console.error('target not found', targetSelector)
+		if (!global && (text.trim() === '')) {
+			return
+		}
+
+		if (!modifier) {
+			modifier = 'content'
+		}
+		else if (modifier === 'auto') {
+			modifier = text.includes('id="' + targetSelector.slice(1) + '"')
+				? 'replace'
+				: 'content'
+		}
+		if (modifier === 'content') {
+			target.innerHTML = text.trim().length ? text : ''
+			return
+		}
+
+		let fragment: DocumentFragment | undefined
+		fragment = document.createRange().createContextualFragment(text.trim().length ? text : '')
+		switch (modifier) {
+			case 'after':
+				target.nextSibling
+					? target.parentNode?.insertBefore(fragment, target.nextSibling)
+					: target.parentNode?.appendChild(fragment)
+				break
+			case 'append':
+				target.append(fragment)
+				break
+			case 'before':
+				target.parentNode?.insertBefore(fragment, target)
+				break
+			case 'prepend':
+				target.prepend(fragment)
+				break
+			case 'replace':
+				target.replaceWith(fragment)
+				break
+			default:
+				console.error('Invalid modifier', modifier)
 		}
 	}
 

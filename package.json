@@ -11,6 +11,8 @@
 	"devDependencies": {
 		"@itrocks/prepare-module": "latest",
 		"@types/node": "^22.9",
+		"concurrently": "^9.1.0",
+		"nodemon": "^3.1.7",
 		"typescript": "5.6"
 	},
 	"files": [
@@ -39,7 +41,12 @@
 	"repository": "https://github.com/itrocks-ts/xtarget",
 	"scripts": {
 		"build": "tsc",
-		"prepare": "prepare-module"
+		"build:watch": "tsc -w",
+		"prepare": "prepare-module",
+		"yalc:publish": "yalc publish",
+		"yalc:publish:watch": "nodemon --watch src --exec 'yalc publish && yalc push'",
+		"yalc:push": "yalc push",
+		"yalc:watch": "concurrently npm:build:watch npm:yalc:publish:watch"
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
