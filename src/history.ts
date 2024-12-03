@@ -41,12 +41,10 @@ export default class XTargetHistory extends Plugin<XTarget>
 
 }
 
-addEventListener('popstate', async (event) => {
+addEventListener('popstate', async event => {
 	if (event.state && event.state.reload) {
-		await xTargetCall(document.location.href, event.state.target, { targetHistoryDisable: true })
 		document.title = event.state.title
+		return xTargetCall(document.location.href, event.state.target, { targetHistoryDisable: true })
 	}
-	else {
-		document.location.reload()
-	}
+	document.location.reload()
 })
