@@ -13,21 +13,19 @@ export default class XTargetComposite extends Plugin<XTarget>
 		{
 			let global = true
 			while (text.includes('<!--#')) {
-				const targetIndex = text.indexOf('<!--#') + 5
+				const targetIndex = text.indexOf('<!--#') + 4
 				const start       = text.indexOf('-->', targetIndex) + 3
 				const stop        = text.indexOf('<!--#end-->', start)
 
-				let   localTargetSelector = text.slice(targetIndex, start - 3)
+				const localTargetSelector = text.slice(targetIndex, start - 3)
 				const localText = text.slice(start, stop)
-				text = text.slice(0, targetIndex - 5) + text.slice(stop + 11)
+				text = text.slice(0, targetIndex - 4) + text.slice(stop + 11)
 				this.setHTML(localText, localTargetSelector)
 
-				if (global && localText.trim().length && document.querySelector(localTargetSelector)) {
-					global = false
-				}
+				global = false
 			}
 
-			return global && text.trim().length && superSetHTML.call(this, text, targetSelector)
+			return (global || text.trim().length) && superSetHTML.call(this, text, targetSelector)
 		}
 	}
 
