@@ -1,8 +1,8 @@
-[![view on npm](https://badgen.net/npm/v/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
-[![npm module downloads](https://badgen.net/npm/dt/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
-[![GitHub repo dependents](https://badgen.net/github/dependents-repo/itrocks-ts/xtarget?label=dependents)](https://github.com/itrocks-ts/xtarget/network/dependents?dependent_type=REPOSITORY)
-[![Report issues on GitHub](https://badgen.net/github/open-issues/itrocks-ts/xtarget?icon=github)](https://github.com/itrocks-ts/xtarget/issues)
-[![Get support on Discord](https://badgen.net/discord/members/kbMjUq5F?icon=discord)](https://discord.gg/kbMjUq5F)
+[![npm version](https://img.shields.io/npm/v/@itrocks/xtarget?logo=npm)](https://www.npmjs.org/package/@itrocks/xtarget)
+[![npm downloads](https://img.shields.io/npm/dm/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
+[![GitHub](https://img.shields.io/github/last-commit/itrocks-ts/xtarget?color=2dba4e&label=commit&logo=github)](https://github.com/itrocks-ts/xtarget)
+[![issues](https://img.shields.io/github/issues/itrocks-ts/xtarget)](https://github.com/itrocks-ts/xtarget/issues)
+[![discord](https://img.shields.io/discord/1314141024020467782?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WFPJjmUx)
 
 # xtarget
 
