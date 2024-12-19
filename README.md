@@ -2,7 +2,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/@itrocks/xtarget)](https://www.npmjs.org/package/@itrocks/xtarget)
 [![GitHub](https://img.shields.io/github/last-commit/itrocks-ts/xtarget?color=2dba4e&label=commit&logo=github)](https://github.com/itrocks-ts/xtarget)
 [![issues](https://img.shields.io/github/issues/itrocks-ts/xtarget)](https://github.com/itrocks-ts/xtarget/issues)
-[![discord](https://img.shields.io/discord/1314141024020467782?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WFPJjmUx)
+[![discord](https://img.shields.io/discord/1314141024020467782?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/RZYhmhgrCk)
 
 # xtarget
 
