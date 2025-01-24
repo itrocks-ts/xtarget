@@ -21,11 +21,13 @@
 		"*.d.ts",
 		"*.js"
 	],
+	"homepage": "https://it.rocks",
 	"keywords": [
 		"ajax",
 		"anchor",
 		"async",
 		"form",
+		"front-end",
 		"it.rocks",
 		"link",
 		"SPA",
@@ -50,5 +52,5 @@
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.14"
+	"version": "0.0.15"
 }
