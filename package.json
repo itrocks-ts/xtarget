@@ -40,7 +40,10 @@
 	"optionalDependencies": {
 		"@itrocks/build": "latest"
 	},
-	"repository": "https://github.com/itrocks-ts/xtarget",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/itrocks-ts/xtarget.git"
+	},
 	"scripts": {
 		"build": "tsc",
 		"build:watch": "tsc -w",
@@ -52,5 +55,5 @@
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.15"
+	"version": "0.0.16"
 }
