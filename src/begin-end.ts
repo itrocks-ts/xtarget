@@ -8,13 +8,24 @@ export default class XTargetBeginEnd extends Plugin<XTarget>
 	{
 		super(xTarget)
 
+		const plugin       = this
+		const superIsEmpty = xTarget.isEmpty
+		xTarget.isEmpty    = function(text)
+		{
+			return superIsEmpty.call(this, plugin.innerText(text))
+		}
+
 		const superSetHTML = xTarget.setHTML
 		xTarget.setHTML    = function(text, target)
 		{
-			const begin = text.indexOf('<!--BEGIN-->') + 12
-			text = (begin > 11) ? text.substring(begin, text.indexOf('<!--END-->', begin)) : text
-			return superSetHTML.call(this, text, target)
+			return superSetHTML.call(this, plugin.innerText(text), target)
 		}
+	}
+
+	innerText = function(text: string)
+	{
+		const begin = text.indexOf('<!--BEGIN-->') + 12
+		return (begin > 11) ? text.substring(begin, text.indexOf('<!--END-->', begin)) : text
 	}
 
 }

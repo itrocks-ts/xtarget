@@ -48,6 +48,11 @@ export default class XTarget extends HasPlugins<XTarget>
 			: this.setResponse(await fetch(element.href, this.requestInit(element)), element.target)
 	}
 
+	isEmpty(text: string)
+	{
+		return !text.trim().length
+	}
+
 	requestInit(_element: XTargetElement): RequestInit
 	{
 		return {}
@@ -63,7 +68,7 @@ export default class XTarget extends HasPlugins<XTarget>
 
 	setHTMLContent(text: string, target: Element)
 	{
-		target.innerHTML = text.trim().length ? text : ''
+		target.innerHTML = this.isEmpty(text) ? '' : text
 	}
 
 	async setResponse(response: Response, target: string)

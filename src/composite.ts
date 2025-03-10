@@ -9,7 +9,7 @@ export default class XTargetComposite extends Plugin<XTarget>
 		super(xTarget)
 
 		const superSetHTML = xTarget.setHTML
-		xTarget.setHTML = function(text, targetSelector)
+		xTarget.setHTML    = function(text, targetSelector)
 		{
 			let global = true
 			while (text.includes('<!--#')) {
@@ -18,14 +18,14 @@ export default class XTargetComposite extends Plugin<XTarget>
 				const stop        = text.indexOf('<!--#end-->', start)
 
 				const localTargetSelector = text.slice(targetIndex, start - 3)
-				const localText = text.slice(start, stop)
+				const localText           = text.slice(start, stop)
 				text = text.slice(0, targetIndex - 4) + text.slice(stop + 11)
 				this.setHTML(localText, localTargetSelector)
 
 				global = false
 			}
 
-			return (global || text.trim().length) && superSetHTML.call(this, text, targetSelector)
+			return (global || !this.isEmpty(text)) && superSetHTML.call(this, text, targetSelector)
 		}
 	}
 

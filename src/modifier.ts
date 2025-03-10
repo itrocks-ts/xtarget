@@ -11,14 +11,14 @@ export default class XTargetModifier extends Plugin<XTarget>
 		let modifier: string | undefined
 
 		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement = function(targetSelector)
+		xTarget.targetElement    = function(targetSelector)
 		{
 			[targetSelector, modifier] = targetSelector.split(':')
 			return superTargetElement.call(this, targetSelector)
 		}
 
 		const superSetHTMLContent = xTarget.setHTMLContent
-		xTarget.setHTMLContent = function(text, target)
+		xTarget.setHTMLContent    = function(text, target)
 		{
 			if (!modifier) {
 				modifier = 'content'
@@ -29,11 +29,11 @@ export default class XTargetModifier extends Plugin<XTarget>
 					: 'content'
 			}
 			if (modifier === 'content') {
-				return superSetHTMLContent.call(this, text.trim().length ? text : '', target)
+				return superSetHTMLContent.call(this, this.isEmpty(text) ? '' : text, target)
 			}
 
 			let fragment: DocumentFragment | undefined
-			fragment = document.createRange().createContextualFragment(text.trim().length ? text : '')
+			fragment = document.createRange().createContextualFragment(this.isEmpty(text) ? '' : text)
 			switch (modifier) {
 				case 'after':
 					return target.nextSibling
