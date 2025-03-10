@@ -45,15 +45,9 @@
 		"url": "git+https://github.com/itrocks-ts/xtarget.git"
 	},
 	"scripts": {
-		"build": "tsc",
-		"build:watch": "tsc -w",
-		"prepare": "prepare-module",
-		"yalc:publish": "yalc publish",
-		"yalc:publish:watch": "nodemon --watch src --exec 'yalc publish && yalc push'",
-		"yalc:push": "yalc push",
-		"yalc:watch": "concurrently npm:build:watch npm:yalc:publish:watch"
+		"build": "tsc && npx prepare-module"
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.16"
+	"version": "0.0.17"
 }

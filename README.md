@@ -154,6 +154,14 @@ When the user navigates back or forward xtarget links:
 - if the target is still present on the page, the content will be loaded into the target without a full-page reload,
 - otherwise, the content will be loaded as full page.
 
+## XTargetMainTarget plugin
+
+This plugin enhances target element selection by automatically resolving `#main` to the first `<main>`
+element in the document.
+
+If no `<main>` element is found, it falls back to the default `targetElement` behavior,
+which looks for an element with the ID `main`.
+
 ## Code your own plugins
 
 If you need to create your own plugins for XTarget, feel free to do so!
