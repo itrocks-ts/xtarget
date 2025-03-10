@@ -8,9 +8,9 @@ export default class XTargetDefaultTarget extends Plugin<XTarget>
 	{
 		super(xTarget)
 
-		const plugin = this
+		const plugin             = this
 		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement = function(targetSelector)
+		xTarget.targetElement    = function(targetSelector)
 		{
 			return superTargetElement.call(this, targetSelector)
 				?? plugin.createDefaultElement(targetSelector)
@@ -19,6 +19,9 @@ export default class XTargetDefaultTarget extends Plugin<XTarget>
 
 	createDefaultElement(targetSelector: string)
 	{
+		if (targetSelector.length === 1) {
+			return
+		}
 		if (targetSelector[0] === '.') {
 			const target = document.createElement('div')
 			target.classList.add(...targetSelector.slice(1).split('.'))
