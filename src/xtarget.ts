@@ -82,7 +82,7 @@ export class XTarget extends HasPlugins<XTarget>
 			return undefined
 		}
 		return targetSelector.startsWith('#')
-			? (document.getElementById(targetSelector.slice(1)) ?? undefined)
+			? ((targetSelector.length > 1) ? (document.getElementById(targetSelector.slice(1)) ?? undefined) : undefined)
 			: (document.querySelector<HTMLElement>(targetSelector) ?? undefined)
 	}
 
