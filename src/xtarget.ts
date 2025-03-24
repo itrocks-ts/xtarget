@@ -3,7 +3,7 @@ import { HasPlugins, Options } from '../node_modules/@itrocks/plugin/plugin.js'
 
 let defaultOptions = {}
 
-export default class XTarget extends HasPlugins<XTarget>
+export class XTarget extends HasPlugins<XTarget>
 {
 
 	constructor(public element: XTargetElement, options: Partial<Options<XTarget>> = defaultOptions)
@@ -94,7 +94,6 @@ export default class XTarget extends HasPlugins<XTarget>
 	}
 
 }
-export { XTarget }
 
 export async function xTargetCall(action: string, target: string, options: Partial<Options<XTarget>> = defaultOptions)
 {

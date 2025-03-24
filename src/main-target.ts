@@ -1,7 +1,7 @@
-import Plugin  from '../node_modules/@itrocks/plugin/plugin.js'
-import XTarget from './xtarget.js'
+import { Plugin }  from '../node_modules/@itrocks/plugin/plugin.js'
+import { XTarget } from './xtarget.js'
 
-export default class XTargetMainTarget extends Plugin<XTarget>
+export class XTargetMainTarget extends Plugin<XTarget>
 {
 
 	constructor(xTarget: XTarget)

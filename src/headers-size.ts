@@ -1,5 +1,5 @@
-import Plugin             from '../node_modules/@itrocks/plugin/plugin.js'
-import XTarget            from './xtarget.js'
+import { Plugin }         from '../node_modules/@itrocks/plugin/plugin.js'
+import { XTarget }        from './xtarget.js'
 import { XTargetElement } from './xtarget.js'
 
 export type XhrInfo = {
@@ -12,7 +12,7 @@ export type XhrInfo = {
 	windowWidth:   number
 }
 
-export default class XTargetHeadersSize extends Plugin<XTarget>
+export class XTargetHeadersSize extends Plugin<XTarget>
 {
 
 	constructor(xTarget: XTarget)

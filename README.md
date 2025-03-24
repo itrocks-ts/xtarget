@@ -20,8 +20,8 @@ Include the ESM script into your web page, then specify the target DOM element's
 
 ```html
 <script type="module">
-	import buildXTarget from './node_modules/@itrocks/xtarget/build.js'
-	buildXTarget()
+	import { buildXTarget } from './node_modules/@itrocks/xtarget/build.js'
+  buildXTarget()
 </script>
 
 <a href="content-to-load.html" target="#here">
@@ -40,14 +40,14 @@ This example demonstrates installing all built-in plugins.
 However, you should include only those you need:
 
 ```ts
-import buildXTarget           from './node_modules/@itrocks/xtarget/build.js'
-import XTargetBeginEnd        from './node_modules/@itrocks/xtarget/begin-end.js'
-import XTargetComposite       from './node_modules/@itrocks/xtarget/composite.js'
-import XTargetDataPropagation from './node_modules/@itrocks/xtarget/data-propagation.js'
-import XTargetDefaultTarget   from './node_modules/@itrocks/xtarget/default-target.js'
-import XTargetHead            from './node_modules/@itrocks/xtarget/head.js'
-import XTargetHeadersSize     from './node_modules/@itrocks/xtarget/headers-size.js'
-import XTargetHistory         from './node_modules/@itrocks/xtarget/history.js'
+import { buildXTarget }           from './node_modules/@itrocks/xtarget/build.js'
+import { XTargetBeginEnd }        from './node_modules/@itrocks/xtarget/begin-end.js'
+import { XTargetComposite }       from './node_modules/@itrocks/xtarget/composite.js'
+import { XTargetDataPropagation } from './node_modules/@itrocks/xtarget/data-propagation.js'
+import { XTargetDefaultTarget }   from './node_modules/@itrocks/xtarget/default-target.js'
+import { XTargetHead }            from './node_modules/@itrocks/xtarget/head.js'
+import { XTargetHeadersSize }     from './node_modules/@itrocks/xtarget/headers-size.js'
+import { XTargetHistory }         from './node_modules/@itrocks/xtarget/history.js'
 
 XTargetDefaultOptions({ plugins: [
 	XTargetBeginEnd,

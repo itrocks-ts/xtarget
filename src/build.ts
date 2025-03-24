@@ -1,8 +1,8 @@
-import build              from '../node_modules/@itrocks/build/build.js'
-import XTarget            from './xtarget.js'
+import { build }          from '../node_modules/@itrocks/build/build.js'
+import { XTarget }        from './xtarget.js'
 import { XTargetElement } from './xtarget.js'
 
-export default function buildXTarget(
+export function buildXTarget(
 	targetStart = ['#'], targetEqual = ['main'], elements = ['a', 'form', 'button', 'input']
 ) {
 	const selectors = [] as string[]
