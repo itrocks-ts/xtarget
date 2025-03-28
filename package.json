@@ -45,9 +45,9 @@
 		"url": "git+https://github.com/itrocks-ts/xtarget.git"
 	},
 	"scripts": {
-		"build": "tsc && npx prepare-module"
+		"build": "tsc && ../prepare-module/prepare-module.js"
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.20"
+	"version": "0.0.21"
 }

@@ -1,4 +1,4 @@
-import { build }          from '../node_modules/@itrocks/build/build.js'
+import { build }          from '../../build/build.js'
 import { XTarget }        from './xtarget.js'
 import { XTargetElement } from './xtarget.js'
 
