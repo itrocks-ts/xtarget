@@ -22,10 +22,8 @@ export class XTargetHeadersSize extends Plugin<XTarget>
 		const superRequestInit = xTarget.requestInit
 		xTarget.requestInit    = function(element: XTargetElement)
 		{
-			const requestInit = superRequestInit.call(this, element)
-			if (!requestInit.headers) {
-				requestInit.headers = new Headers
-			}
+			const requestInit      = superRequestInit.call(this, element)
+			requestInit.headers  ??= new Headers
 			const headers          = requestInit.headers as Headers
 			const targetSelector   = this.targetSelector(element)
 			const xhrInfo: XhrInfo = Object.assign(JSON.parse(headers.get('XHR-Info') ?? '{}'), {

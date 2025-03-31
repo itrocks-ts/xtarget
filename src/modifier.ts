@@ -20,13 +20,13 @@ export class XTargetModifier extends Plugin<XTarget>
 		const superSetHTMLContent = xTarget.setHTMLContent
 		xTarget.setHTMLContent    = function(text, target)
 		{
-			if (!modifier) {
-				modifier = 'content'
-			}
-			else if (modifier === 'auto') {
+			if (modifier === 'auto') {
 				modifier = text.includes('id="' + target.id + '"')
 					? 'replace'
 					: 'content'
+			}
+			else {
+				modifier ??= 'content'
 			}
 			if (modifier === 'content') {
 				return superSetHTMLContent.call(this, this.isEmpty(text) ? '' : text, target)
