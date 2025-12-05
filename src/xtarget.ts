@@ -89,7 +89,12 @@ export class XTarget extends HasPlugins<XTarget>
 		if (target === '') {
 			return undefined
 		}
-		return document.querySelector<HTMLElement>(target) ?? undefined
+		try {
+			return document.querySelector<HTMLElement>(target) ?? undefined
+		}
+		catch {
+			return undefined
+		}
 	}
 
 	targetSelector(element: XTargetElement)
