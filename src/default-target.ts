@@ -10,10 +10,13 @@ export class XTargetDefaultTarget extends Plugin<XTarget>
 
 		const plugin             = this
 		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement    = function(targetSelector)
+		xTarget.targetElement    = function(target)
 		{
-			return superTargetElement.call(this, targetSelector)
-				?? plugin.createDefaultElement(targetSelector)
+			if (target instanceof Element) {
+				return target
+			}
+			return superTargetElement.call(this, target)
+				?? plugin.createDefaultElement(target)
 		}
 	}
 

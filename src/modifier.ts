@@ -11,10 +11,12 @@ export class XTargetModifier extends Plugin<XTarget>
 		let modifier: string | undefined
 
 		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement    = function(targetSelector)
+		xTarget.targetElement    = function(target : string | Element)
 		{
-			[targetSelector, modifier] = targetSelector.split(':')
-			return superTargetElement.call(this, targetSelector)
+			if (!(target instanceof Element)) {
+				[target, modifier] = target.split(':')
+			}
+			return superTargetElement.call(this, target)
 		}
 
 		const superSetHTMLContent = xTarget.setHTMLContent
