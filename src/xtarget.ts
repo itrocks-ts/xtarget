@@ -1,7 +1,7 @@
 import { formFetchOnSubmit }   from '../../form-fetch/form-fetch.js'
 import { HasPlugins, Options } from '../../plugin/plugin.js'
 
-let defaultOptions = {}
+export let defaultOptions = {}
 
 export class XTarget extends HasPlugins<XTarget>
 {
@@ -29,7 +29,7 @@ export class XTarget extends HasPlugins<XTarget>
 	async activateAnchorEvent(event: MouseEvent)
 	{
 		event.preventDefault()
-		return this.call(event.target as HTMLAnchorElement)
+		return this.callAnchor(event.target as HTMLAnchorElement)
 	}
 
 	activateFormElement(element: Exclude<XTargetElement, HTMLAnchorElement>)
@@ -37,15 +37,20 @@ export class XTarget extends HasPlugins<XTarget>
 		formFetchOnSubmit(
 			element,
 			(response, targetSelector) => this.setResponse(response, targetSelector),
-			submitter => this.requestInit(submitter as XTargetElement)
+			submitter => this.requestInit(this.targetElement(this.targetSelector(submitter)))
 		)
 	}
 
-	async call(element: HTMLAnchorElement)
+	async call(href: string, target: string | Element)
 	{
-		return (element.href === 'about:blank')
-			? this.setHTML('', element.target)
-			: this.setResponse(await fetch(element.href, this.requestInit(element)), element.target)
+		return (href === 'about:blank')
+			? this.setHTML('', target)
+			: this.setResponse(await fetch(href, this.requestInit(this.targetElement(target))), target)
+	}
+
+	async callAnchor(element: HTMLAnchorElement)
+	{
+		return this.call(element.href, element.target)
 	}
 
 	isEmpty(text: string)
@@ -53,17 +58,17 @@ export class XTarget extends HasPlugins<XTarget>
 		return !text.trim().length
 	}
 
-	requestInit(_element: XTargetElement): RequestInit
+	requestInit(_target?: Element): RequestInit
 	{
 		return {}
 	}
 
-	setHTML(text: string, targetSelector: string)
+	setHTML(text: string, target: string | Element)
 	{
-		let target = this.targetElement(targetSelector)
-		return target
-			? this.setHTMLContent(text, target)
-			: console.error('target not found', targetSelector)
+		const targetElement = this.targetElement(target)
+		return targetElement
+			? this.setHTMLContent(text, targetElement)
+			: console.error('target not found', target)
 	}
 
 	setHTMLContent(text: string, target: Element)
@@ -71,19 +76,20 @@ export class XTarget extends HasPlugins<XTarget>
 		target.innerHTML = this.isEmpty(text) ? '' : text
 	}
 
-	async setResponse(response: Response, target: string)
+	async setResponse(response: Response, target: string | Element)
 	{
 		this.setHTML(await response.text(), target)
 	}
 
-	targetElement(targetSelector: string)
+	targetElement(target: string | Element)
 	{
-		if (targetSelector === '') {
+		if (target instanceof Element) {
+			return target
+		}
+		if (target === '') {
 			return undefined
 		}
-		return targetSelector.startsWith('#')
-			? ((targetSelector.length > 1) ? (document.getElementById(targetSelector.slice(1)) ?? undefined) : undefined)
-			: (document.querySelector<HTMLElement>(targetSelector) ?? undefined)
+		return document.querySelector<HTMLElement>(target) ?? undefined
 	}
 
 	targetSelector(element: XTargetElement)
@@ -97,10 +103,7 @@ export class XTarget extends HasPlugins<XTarget>
 
 export async function xTargetCall(action: string, target: string, options: Partial<Options<XTarget>> = defaultOptions)
 {
-	const anchor = document.createElement('a')
-	anchor.setAttribute('href',   action)
-	anchor.setAttribute('target', target)
-	return new XTarget(anchor, options).call(anchor)
+	return new XTarget(document.createElement('a'), options).call(action, target)
 }
 
 export function XTargetDefaultOptions(options: Partial<Options<XTarget>>)
