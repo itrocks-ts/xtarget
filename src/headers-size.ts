@@ -1,6 +1,5 @@
-import { Plugin }         from '../../plugin/plugin.js'
-import { XTarget }        from './xtarget.js'
-import { XTargetElement } from './xtarget.js'
+import { Plugin }  from '../../plugin/plugin.js'
+import { XTarget } from './xtarget.js'
 
 export type XhrInfo = {
 	screenHeight:  number,
@@ -20,21 +19,19 @@ export class XTargetHeadersSize extends Plugin<XTarget>
 		super(xTarget)
 
 		const superRequestInit = xTarget.requestInit
-		xTarget.requestInit    = function(element: XTargetElement)
+		xTarget.requestInit    = function(target?: Element)
 		{
-			const requestInit      = superRequestInit.call(this, element)
+			const requestInit      = superRequestInit.call(this, target)
 			requestInit.headers  ??= new Headers
 			const headers          = requestInit.headers as Headers
-			const targetSelector   = this.targetSelector(element)
 			const xhrInfo: XhrInfo = Object.assign(JSON.parse(headers.get('XHR-Info') ?? '{}'), {
 				screenHeight: screen.height,
 				screenWidth:  screen.width,
-				target:       targetSelector,
 				windowHeight: window.innerHeight,
 				windowWidth:  window.innerWidth
 			})
-			const target = this.targetElement(targetSelector)
 			if (target) {
+				xhrInfo.target       = target.id ? ('#' + target.id) : target.nodeName
 				xhrInfo.targetHeight = target.clientHeight
 				xhrInfo.targetWidth  = target.clientWidth
 			}
