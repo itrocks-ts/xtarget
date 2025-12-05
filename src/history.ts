@@ -1,6 +1,8 @@
-import { formMethod }           from '../../form-fetch/form-fetch.js'
-import { Plugin }               from '../../plugin/plugin.js'
-import { XTarget, xTargetCall } from './xtarget.js'
+import { formMethod }     from '../../form-fetch/form-fetch.js'
+import { Plugin }         from '../../plugin/plugin.js'
+import { defaultOptions } from './xtarget.js'
+import { XTarget }        from './xtarget.js'
+import { xTargetCall }    from './xtarget.js'
 
 export class XTargetHistory extends Plugin<XTarget>
 {
@@ -22,11 +24,17 @@ export class XTargetHistory extends Plugin<XTarget>
 		const superSetHTML = xTarget.setHTML
 		xTarget.setHTML    = function(text, targetSelector)
 		{
-			const html = superSetHTML.call(this, text, targetSelector)
-			if (!response || postMethod || xTarget.options.targetHistoryDisable) {
+			const target = this.targetElement(targetSelector)
+			const html   = superSetHTML.call(this, text, target ?? targetSelector)
+			if (!response || !target || postMethod || xTarget.options.targetHistoryDisable) {
 				return html
 			}
-			history.pushState({ reload: true, target: targetSelector, title: document.title }, '', response.url)
+			const state = {
+				reload: true,
+				target: target.id ? '#' + target.id : target.nodeName,
+				title:  document.title
+			}
+			history.pushState(state, '', response.url)
 			response = undefined
 			return html
 		}
@@ -42,9 +50,13 @@ export class XTargetHistory extends Plugin<XTarget>
 }
 
 addEventListener('popstate', async event => {
-	if (event.state && event.state.reload && event.state.target && document.querySelector(event.state.target)) {
+	if (event.state?.reload && event.state.target && document.querySelector(event.state.target)) {
 		document.title = event.state.title
-		return xTargetCall(document.location.href, event.state.target, { targetHistoryDisable: true })
+		return xTargetCall(
+			document.location.href,
+			event.state.target,
+			Object.assign(defaultOptions, { targetHistoryDisable: true })
+		)
 	}
 	document.location.reload()
 })
