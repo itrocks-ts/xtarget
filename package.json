@@ -10,10 +10,10 @@
 	"description": "The simplest way to choose any element in your DOM as a target for your anchors and forms",
 	"devDependencies": {
 		"@itrocks/prepare-module": "latest",
-		"@types/node": "^22.9",
-		"concurrently": "^9.1.0",
-		"nodemon": "^3.1.7",
-		"typescript": "~5.8"
+		"@types/node": "^24.10",
+		"concurrently": "^9.2.1",
+		"nodemon": "^3.1.11",
+		"typescript": "~5.9"
 	},
 	"files": [
 		"LICENSE",
@@ -49,5 +49,5 @@
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.0.26"
+	"version": "0.0.27"
 }
