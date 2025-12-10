@@ -48,6 +48,9 @@ import { XTargetDefaultTarget }   from './node_modules/@itrocks/xtarget/default-
 import { XTargetHead }            from './node_modules/@itrocks/xtarget/head.js'
 import { XTargetHeadersSize }     from './node_modules/@itrocks/xtarget/headers-size.js'
 import { XTargetHistory }         from './node_modules/@itrocks/xtarget/history.js'
+import { XTargetHoldOn }          from './node_modules/@itrocks/xtarget/hold-on.js'
+import { XTargetMainTarget }      from './node_modules/@itrocks/xtarget/main-target.js'
+import { XTargetSecureClick }     from './node_modules/@itrocks/xtarget/secure-click.js'
 
 XTargetDefaultOptions({ plugins: [
 	XTargetBeginEnd,
@@ -56,7 +59,10 @@ XTargetDefaultOptions({ plugins: [
 	XTargetDefaultTarget,
 	XTargetHead,
 	XTargetHeadersSize,
-	XTargetHistory
+	XTargetHistory,
+	XTargetHoldOn,
+	XTargetMainTarget,
+	XTargetSecureClick
 ] })
 buildXTarget()
 ```
@@ -154,6 +160,13 @@ When the user navigates back or forward xtarget links:
 - if the target is still present on the page, the content will be loaded into the target without a full-page reload,
 - otherwise, the content will be loaded as full page.
 
+## XTargetHoldOn plugin
+
+When this plugin is activated, a full-page overlay is displayed while slow xtarget requests are pending.
+
+If a request takes more than a short delay, the mouse cursor changes to `wait` and, after another delay,
+a semi-transparent grey foreground is applied to indicate that the application is waiting for a response.
+
 ## XTargetMainTarget plugin
 
 This plugin enhances target element selection by automatically resolving `#main` to the first `<main>`
@@ -161,6 +174,14 @@ element in the document.
 
 If no `<main>` element is found, it falls back to the default `targetElement` behavior,
 which looks for an element with the ID `main`.
+
+## XTargetSecureClick plugin
+
+When this plugin is activated, xtarget anchors and forms are protected against multiple triggering.
+
+A minimum delay is enforced between two activations, and a new request will be blocked
+while a previous one is still being processed. This helps prevent accidental double-clicks,
+double form submissions, or fast repeated activations.
 
 ## Code your own plugins
 
