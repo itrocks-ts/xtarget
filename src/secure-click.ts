@@ -10,8 +10,8 @@ export class XTargetSecureClick extends Plugin<XTarget>
 	{
 		super(xTarget)
 
-		let   lastActivationTime   = 0
-		let   lastResponseReceived = true
+		let lastActivationTime   = 0
+		let lastResponseReceived = true
 
 		function canActivate()
 		{
@@ -43,7 +43,7 @@ export class XTargetSecureClick extends Plugin<XTarget>
 		const superActivateFormElement = xTarget.activateFormElement
 		xTarget.activateFormElement = function(element)
 		{
-			const form = element instanceof HTMLFormElement ? element : element.form
+			const form = (element instanceof HTMLFormElement) ? element : element.form
 			if (form) {
 				form.addEventListener('submit', event => {
 					if (!canActivate()) {
