@@ -4,13 +4,11 @@ import { XTarget } from './xtarget.js'
 export class XTargetDefaultTarget extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
 		const plugin             = this
-		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement    = function(target)
+		const superTargetElement = this.of.targetElement
+		this.of.targetElement    = function(target)
 		{
 			if (target instanceof Element) {
 				return target

@@ -4,12 +4,10 @@ import { XTarget } from './xtarget.js'
 export class XTargetHead extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		const superSetHTML = xTarget.setHTML
-		xTarget.setHTML    = function(text, target)
+		const superSetHTML = this.of.setHTML
+		this.of.setHTML    = function(text, target)
 		{
 			const addHead     = document.createElement('head')
 			const position    = text.indexOf('>', text.indexOf('<head') + 5) + 1

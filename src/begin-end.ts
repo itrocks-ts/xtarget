@@ -4,19 +4,18 @@ import { XTarget } from './xtarget.js'
 export class XTargetBeginEnd extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
+		const plugin = this
 
-		const plugin       = this
-		const superIsEmpty = xTarget.isEmpty
-		xTarget.isEmpty    = function(text)
+		const superIsEmpty = this.of.isEmpty
+		this.of.isEmpty    = function(text)
 		{
 			return superIsEmpty.call(this, plugin.innerText(text))
 		}
 
-		const superSetHTML = xTarget.setHTML
-		xTarget.setHTML    = function(text, target)
+		const superSetHTML = this.of.setHTML
+		this.of.setHTML    = function(text, target)
 		{
 			return superSetHTML.call(this, plugin.innerText(text), target)
 		}

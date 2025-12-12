@@ -4,12 +4,10 @@ import { XTarget } from './xtarget.js'
 export class XTargetDataPropagation extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		const superActivateAnchorEvent = xTarget.activateAnchorEvent
-		xTarget.activateAnchorEvent    = function(event)
+		const superActivateAnchorEvent = this.of.activateAnchorEvent
+		this.of.activateAnchorEvent    = function(event)
 		{
 			const element = event.target as HTMLAnchorElement
 			if (element.dataset.stopImmediatePropagation === '1') {

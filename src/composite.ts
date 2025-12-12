@@ -4,12 +4,10 @@ import { XTarget } from './xtarget.js'
 export class XTargetComposite extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		const superSetHTML = xTarget.setHTML
-		xTarget.setHTML    = function(text, targetSelector)
+		const superSetHTML = this.of.setHTML
+		this.of.setHTML    = function(text, targetSelector)
 		{
 			let global = true
 			while (text.includes('<!--#')) {

@@ -4,14 +4,12 @@ import { XTarget } from './xtarget.js'
 export class XTargetModifier extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
 		let modifier: string | undefined
 
-		const superTargetElement = xTarget.targetElement
-		xTarget.targetElement    = function(target : string | Element)
+		const superTargetElement = this.of.targetElement
+		this.of.targetElement    = function(target : string | Element)
 		{
 			if (!(target instanceof Element)) {
 				[target, modifier] = target.split(':')
@@ -19,8 +17,8 @@ export class XTargetModifier extends Plugin<XTarget>
 			return superTargetElement.call(this, target)
 		}
 
-		const superSetHTMLContent = xTarget.setHTMLContent
-		xTarget.setHTMLContent    = function(text, target)
+		const superSetHTMLContent = this.of.setHTMLContent
+		this.of.setHTMLContent    = function(text, target)
 		{
 			if (modifier === 'auto') {
 				modifier = text.includes('id="' + target.id + '"')

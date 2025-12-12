@@ -6,10 +6,8 @@ const MIN_DELAY = 1000 // ms
 export class XTargetSecureClick extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
 		let lastActivationTime   = 0
 		let lastResponseReceived = true
 
@@ -29,8 +27,8 @@ export class XTargetSecureClick extends Plugin<XTarget>
 			lastResponseReceived = false
 		}
 
-		const superActivateAnchorEvent = xTarget.activateAnchorEvent
-		xTarget.activateAnchorEvent = function(event)
+		const superActivateAnchorEvent = this.of.activateAnchorEvent
+		this.of.activateAnchorEvent = function(event)
 		{
 			if (!canActivate()) {
 				event.preventDefault()
@@ -40,8 +38,8 @@ export class XTargetSecureClick extends Plugin<XTarget>
 			return superActivateAnchorEvent.call(this, event)
 		}
 
-		const superActivateFormElement = xTarget.activateFormElement
-		xTarget.activateFormElement = function(element)
+		const superActivateFormElement = this.of.activateFormElement
+		this.of.activateFormElement = function(element)
 		{
 			const form = (element instanceof HTMLFormElement) ? element : element.form
 			if (form) {
@@ -57,8 +55,8 @@ export class XTargetSecureClick extends Plugin<XTarget>
 			return superActivateFormElement.call(this, element)
 		}
 
-		const superSetResponse = xTarget.setResponse
-		xTarget.setResponse = function(responseCall, target)
+		const superSetResponse = this.of.setResponse
+		this.of.setResponse = function(responseCall, target)
 		{
 			lastResponseReceived = true
 			return superSetResponse.call(this, responseCall, target)

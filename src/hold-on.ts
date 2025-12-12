@@ -62,19 +62,17 @@ function ensureOverlay()
 export class XTargetHoldOn extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		const superRequestInit = xTarget.requestInit
-		xTarget.requestInit    = function(target?: Element)
+		const superRequestInit = this.of.requestInit
+		this.of.requestInit    = function(target?: Element)
 		{
 			beginWait()
 			return superRequestInit.call(this, target)
 		}
 
-		const superSetResponse = xTarget.setResponse
-		xTarget.setResponse    = async function(response, target)
+		const superSetResponse = this.of.setResponse
+		this.of.setResponse    = async function(response, target)
 		{
 			try {
 				return await superSetResponse.call(this, response, target)

@@ -14,12 +14,10 @@ export type XhrInfo = {
 export class XTargetHeadersSize extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		const superRequestInit = xTarget.requestInit
-		xTarget.requestInit    = function(target?: Element)
+		const superRequestInit = this.of.requestInit
+		this.of.requestInit    = function(target?: Element)
 		{
 			const requestInit      = superRequestInit.call(this, target)
 			requestInit.headers  ??= new Headers

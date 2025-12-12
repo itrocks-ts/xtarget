@@ -7,12 +7,11 @@ import { xTargetCall }    from './xtarget.js'
 export class XTargetHistory extends Plugin<XTarget>
 {
 
-	constructor(xTarget: XTarget)
+	init()
 	{
-		super(xTarget)
-
-		let postMethod = false
-		let response: Response | undefined
+		let   postMethod = false
+		let   response:    Response | undefined
+		const xTarget    = this.of
 
 		const superActivateFormElement = xTarget.activateFormElement
 		xTarget.activateFormElement    = function(element)
@@ -55,7 +54,7 @@ addEventListener('popstate', async event => {
 		return xTargetCall(
 			document.location.href,
 			event.state.target,
-			Object.assign(defaultOptions, { targetHistoryDisable: true })
+			Object.assign({}, defaultOptions, { targetHistoryDisable: true })
 		)
 	}
 	document.location.reload()
