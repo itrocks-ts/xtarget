@@ -7,8 +7,9 @@ export class XTargetComposite extends Plugin<XTarget>
 	init()
 	{
 		const superSetHTML = this.of.setHTML
-		this.of.setHTML    = function(text, targetSelector)
+		this.of.setHTML    = function(text, target)
 		{
+			let targetElement: Element | undefined = this.targetElement(target)
 			let global = true
 			while (text.includes('<!--#')) {
 				const targetIndex = text.indexOf('<!--#') + 4
@@ -16,14 +17,18 @@ export class XTargetComposite extends Plugin<XTarget>
 				const stop        = text.indexOf('<!--#end-->', start)
 
 				const localTargetSelector = text.slice(targetIndex, start - 3)
+				const localTargetElement  = this.targetElement(localTargetSelector)
 				const localText           = text.slice(start, stop)
 				text = text.slice(0, targetIndex - 4) + text.slice(stop + 11)
-				this.setHTML(localText, localTargetSelector)
+				this.setHTML(localText, localTargetElement ?? localTargetSelector)
 
+				if (localTargetElement === targetElement) {
+					targetElement = undefined
+				}
 				global = false
 			}
 
-			return (global || !this.isEmpty(text)) && superSetHTML.call(this, text, targetSelector)
+			return targetElement && (global || !this.isEmpty(text)) && superSetHTML.call(this, text, targetElement ?? target)
 		}
 	}
 
