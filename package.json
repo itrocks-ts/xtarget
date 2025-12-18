@@ -16,6 +16,7 @@
 		"typescript": "~5.9"
 	},
 	"files": [
+		"/*.svg",
 		"LICENSE",
 		"README.md",
 		"*.d.ts",
@@ -45,9 +46,9 @@
 		"url": "git+https://github.com/itrocks-ts/xtarget.git"
 	},
 	"scripts": {
-		"build": "tsc && ../prepare-module/prepare-module.js"
+		"build": "tsc && ../prepare-module/prepare-module.js && cp src/*.svg ./"
 	},
 	"type": "module",
 	"types": "./xtarget.d.ts",
-	"version": "0.3.1"
+	"version": "0.3.2"
 }

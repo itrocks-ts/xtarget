@@ -20,7 +20,9 @@ function beginWait()
 		if (!pending) return
 		ensureOverlay()
 		if (overlay) {
-			overlay.style.backgroundColor = 'rgba(128,128,128,.3)'
+			const spinner = overlay.children[0] as HTMLImageElement
+			overlay.style.backgroundColor = 'rgba(0,0,0,.3)'
+			spinner.style.opacity         = '1'
 		}
 	}, 1000)
 }
@@ -49,13 +51,25 @@ function ensureOverlay()
 	if (overlay) return
 	overlay = document.createElement('div')
 	Object.assign(overlay.style, {
+		alignItems:      'center',
 		backgroundColor: 'transparent',
 		cursor:          'wait',
+		display:         'flex',
 		inset:           '0',
+		justifyContent:  'center',
 		position:        'fixed',
-		transition:      'background-color .5s ease-in-out',
+		transition:      'background-color .2s ease-in-out',
 		zIndex:          '2147483647',
 	})
+	const spinner = document.createElement('img')
+	spinner.src   = '/node_modules/@itrocks/xtarget/hold-on.svg'
+	Object.assign(spinner.style, {
+		height:     '96px',
+		opacity:    '0',
+		transition: 'opacity .5s ease-in-out',
+		width:      '96px;'
+	})
+	overlay.appendChild(spinner)
 	document.body.appendChild(overlay)
 }
 
