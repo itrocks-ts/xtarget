@@ -55,6 +55,13 @@ export class XTargetSecureClick extends Plugin<XTarget>
 			return superActivateFormElement.call(this, element)
 		}
 
+		const superOnCallError = this.of.onCallError
+		this.of.onCallError = function(error, href, target)
+		{
+			lastResponseReceived = true
+			return superOnCallError.call(this, error, href, target)
+		}
+
 		const superSetResponse = this.of.setResponse
 		this.of.setResponse = function(responseCall, target)
 		{

@@ -78,6 +78,13 @@ export class XTargetHoldOn extends Plugin<XTarget>
 
 	init()
 	{
+		const superOnCallError = this.of.onCallError
+		this.of.onCallError = function(error, href, target)
+		{
+			endWait()
+			return superOnCallError.call(this, error, href, target)
+		}
+
 		const superRequestInit = this.of.requestInit
 		this.of.requestInit    = function(target?: Element)
 		{
@@ -88,12 +95,8 @@ export class XTargetHoldOn extends Plugin<XTarget>
 		const superSetResponse = this.of.setResponse
 		this.of.setResponse    = async function(response, target)
 		{
-			try {
-				return await superSetResponse.call(this, response, target)
-			}
-			finally {
-				endWait()
-			}
+			endWait()
+			return await superSetResponse.call(this, response, target)
 		}
 	}
 

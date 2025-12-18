@@ -37,15 +37,24 @@ export class XTarget extends HasPlugins<XTarget>
 		formFetchOnSubmit(
 			element,
 			(response, targetSelector) => this.setResponse(response, targetSelector),
-			submitter => this.requestInit(this.targetElement(this.targetSelector(submitter)))
+			submitter                  => this.requestInit(this.targetElement(this.targetSelector(submitter))),
+			(error, href, target)      => this.onCallError(error, href, target)
 		)
 	}
 
 	async call(href: string, target: string | Element)
 	{
-		return (href === 'about:blank')
+		const init = this.requestInit(this.targetElement(target))
+		let   response
+		try {
+			response = await fetch(href, init)
+		}
+		catch(error: any) {
+			this.onCallError(error, href, target)
+		}
+		return ((href === 'about:blank') || !response)
 			? this.setHTML('', target)
-			: this.setResponse(await fetch(href, this.requestInit(this.targetElement(target))), target)
+			: this.setResponse(await fetch(href, init), target)
 	}
 
 	async callAnchor(element: HTMLAnchorElement)
@@ -56,6 +65,12 @@ export class XTarget extends HasPlugins<XTarget>
 	isEmpty(text: string)
 	{
 		return !text.trim().length
+	}
+
+	onCallError(error: any, href: string, target: string | Element)
+	{
+		console.error('xtarget call error:', href, target)
+		throw error
 	}
 
 	requestInit(_target?: Element): RequestInit
