@@ -38,7 +38,7 @@ export class XTarget extends HasPlugins<XTarget>
 			element,
 			(response, targetSelector) => this.setResponse(response, targetSelector),
 			submitter                  => this.requestInit(this.targetElement(this.targetSelector(submitter))),
-			(error, href, target)      => this.onCallError(error, href, target)
+			(error, action, target)    => this.onCallError(error, action, target)
 		)
 	}
 
@@ -67,9 +67,9 @@ export class XTarget extends HasPlugins<XTarget>
 		return !text.trim().length
 	}
 
-	onCallError(error: any, href: string, target: string | Element)
+	onCallError(error: any, url: string, target: string | Element)
 	{
-		console.error('xtarget call error:', href, target)
+		console.error('xtarget call error:', url, target)
 		throw error
 	}
 
