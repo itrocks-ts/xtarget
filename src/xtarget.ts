@@ -54,7 +54,7 @@ export class XTarget extends HasPlugins<XTarget>
 		}
 		return ((href === 'about:blank') || !response)
 			? this.setHTML('', target)
-			: this.setResponse(await fetch(href, init), target)
+			: this.setResponse(response, target)
 	}
 
 	async callAnchor(element: HTMLAnchorElement)
