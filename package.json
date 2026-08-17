@@ -44,7 +44,7 @@
 		"url": "git+https://github.com/itrocks-ts/xtarget.git"
 	},
 	"scripts": {
-		"build": "tsc && ../prepare-module/prepare-module.js && cp src/*.svg ./"
+		"build": "tsc && node ../prepare-module/prepare-module.js && node -e \"const fs=require('node:fs'),path=require('node:path');for(const file of fs.readdirSync('src'))if(file.endsWith('.svg'))fs.copyFileSync(path.join('src',file),file)\""
 	},
-	"version": "0.3.7"
+	"version": "0.4.0"
 }
