@@ -10,8 +10,6 @@
 	"description": "The simplest way to choose any element in your DOM as a target for your anchors and forms",
 	"devDependencies": {
 		"@itrocks/prepare-module": "latest",
-		"concurrently": "^9.2.1",
-		"nodemon": "^3.1.11",
 		"typescript": "^7.0"
 	},
 	"files": [
@@ -46,5 +44,5 @@
 	"scripts": {
 		"build": "tsc && node ../prepare-module/prepare-module.js && node -e \"const fs=require('node:fs'),path=require('node:path');for(const file of fs.readdirSync('src'))if(file.endsWith('.svg'))fs.copyFileSync(path.join('src',file),file)\""
 	},
-	"version": "0.4.0"
+	"version": "0.4.1"
 }
