@@ -16,14 +16,9 @@ npm i @itrocks/build @itrocks/xtarget
 
 ## Usage
 
-Include the ESM script into your web page, then specify the target DOM element's ID into your HTML code:
+Once `xtarget` is active, specify the target DOM element's ID on anchors and forms:
 
 ```html
-<script type="module">
-	import { buildXTarget } from './node_modules/@itrocks/xtarget/build.js'
-  buildXTarget()
-</script>
-
 <a href="content-to-load.html" target="#here">
 	Load HTML content
 </a>
@@ -33,39 +28,6 @@ Include the ESM script into your web page, then specify the target DOM element's
 
 If the target descriptor does not match any existing element, the page will be called,
 but the loaded content will be discarded.
-
-## Installing plugins
-
-This example demonstrates installing all built-in plugins.
-However, you should include only those you need:
-
-```ts
-import { buildXTarget }           from './node_modules/@itrocks/xtarget/build.js'
-import { XTargetBeginEnd }        from './node_modules/@itrocks/xtarget/begin-end.js'
-import { XTargetComposite }       from './node_modules/@itrocks/xtarget/composite.js'
-import { XTargetDataPropagation } from './node_modules/@itrocks/xtarget/data-propagation.js'
-import { XTargetDefaultTarget }   from './node_modules/@itrocks/xtarget/default-target.js'
-import { XTargetHead }            from './node_modules/@itrocks/xtarget/head.js'
-import { XTargetHeadersSize }     from './node_modules/@itrocks/xtarget/headers-size.js'
-import { XTargetHistory }         from './node_modules/@itrocks/xtarget/history.js'
-import { XTargetHoldOn }          from './node_modules/@itrocks/xtarget/hold-on.js'
-import { XTargetMainTarget }      from './node_modules/@itrocks/xtarget/main-target.js'
-import { XTargetSecureClick }     from './node_modules/@itrocks/xtarget/secure-click.js'
-
-XTargetDefaultOptions({ plugins: [
-	XTargetBeginEnd,
-	XTargetComposite,
-	XTargetDataPropagation,
-	XTargetDefaultTarget,
-	XTargetHead,
-	XTargetHeadersSize,
-	XTargetHistory,
-	XTargetHoldOn,
-	XTargetMainTarget,
-	XTargetSecureClick
-] })
-buildXTarget()
-```
 
 ## XTargetBeginEnd plugin
 
@@ -182,6 +144,70 @@ When this plugin is activated, xtarget anchors and forms are protected against m
 A minimum delay is enforced between two activations, and a new request will be blocked
 while a previous one is still being processed. This helps prevent accidental double-clicks,
 double form submissions, or fast repeated activations.
+
+## Clearing a target
+
+`href="about:blank"` clears the declared target locally without issuing a fetch or navigating the document.
+The usual target modifiers apply. With `XTargetModifier`, this removes a modal entirely:
+
+```html
+<a href="about:blank" target="#modal:replace">Cancel</a>
+```
+
+## Usage with the it.rocks framework
+
+The [it.rocks framework](https://github.com/itrocks-ts/framework) activates `xtarget` for dynamic anchors and forms.
+Its browser entry installs `XTargetBeginEnd`, `XTargetComposite`, `XTargetDefaultTarget`, `XTargetHead`,
+`XTargetHeadersSize`, `XTargetHistory`, `XTargetHoldOn`, `XTargetMainTarget`, `XTargetModifier` and
+`XTargetSecureClick`.
+Use the HTML attributes and response markers described above without repeating this activation in application code.
+
+## Usage outside the it.rocks framework
+
+### Activation
+
+Include the ESM entry in your page and activate dynamic anchors and forms once:
+
+```html
+<script type="module">
+  import { buildXTarget } from './node_modules/@itrocks/xtarget/build.js'
+  buildXTarget()
+</script>
+```
+
+### Installing plugins
+
+This example demonstrates installing all built-in plugins.
+However, you should include only those you need:
+
+```ts
+import { buildXTarget }           from './node_modules/@itrocks/xtarget/build.js'
+import { XTargetBeginEnd }        from './node_modules/@itrocks/xtarget/begin-end.js'
+import { XTargetComposite }       from './node_modules/@itrocks/xtarget/composite.js'
+import { XTargetDataPropagation } from './node_modules/@itrocks/xtarget/data-propagation.js'
+import { XTargetDefaultTarget }   from './node_modules/@itrocks/xtarget/default-target.js'
+import { XTargetHead }            from './node_modules/@itrocks/xtarget/head.js'
+import { XTargetHeadersSize }     from './node_modules/@itrocks/xtarget/headers-size.js'
+import { XTargetHistory }         from './node_modules/@itrocks/xtarget/history.js'
+import { XTargetHoldOn }          from './node_modules/@itrocks/xtarget/hold-on.js'
+import { XTargetMainTarget }      from './node_modules/@itrocks/xtarget/main-target.js'
+import { XTargetSecureClick }     from './node_modules/@itrocks/xtarget/secure-click.js'
+import { XTargetDefaultOptions }  from './node_modules/@itrocks/xtarget/xtarget.js'
+
+XTargetDefaultOptions({ plugins: [
+	XTargetBeginEnd,
+	XTargetComposite,
+	XTargetDataPropagation,
+	XTargetDefaultTarget,
+	XTargetHead,
+	XTargetHeadersSize,
+	XTargetHistory,
+	XTargetHoldOn,
+	XTargetMainTarget,
+	XTargetSecureClick
+] })
+buildXTarget()
+```
 
 ## Code your own plugins
 

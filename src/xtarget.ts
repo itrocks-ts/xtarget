@@ -44,6 +44,7 @@ export class XTarget extends HasPlugins<XTarget>
 
 	async call(href: string, target: string | Element)
 	{
+		if (href === 'about:blank') return this.setHTML('', target)
 		const init = this.requestInit(this.targetElement(target))
 		let   response
 		try {
