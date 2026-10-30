@@ -25,7 +25,13 @@ export class XTargetHistory extends Plugin<XTarget>
 		{
 			const target = this.targetElement(targetSelector)
 			const html   = superSetHTML.call(this, text, target ?? targetSelector)
-			if (!response || !target || postMethod || xTarget.options.targetHistoryDisable) {
+			if (
+				!response
+				|| !target
+				|| postMethod
+				|| xTarget.options.targetHistoryDisable
+				|| (xTarget.element.dataset.targetHistory === 'false')
+			) {
 				return html
 			}
 			const state = {

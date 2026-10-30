@@ -118,6 +118,15 @@ This enables users to navigate through the links they followed by clicking on xt
 
 Only `GET` requests with non-empty response content will be added to the history.
 
+Set `data-target-history="false"` on a targeted link or form to load its response without adding a history entry
+or changing the address bar:
+
+```html
+<a href="list?custom=favourites" target="main" data-target-history="false">Favourites</a>
+```
+
+Programmatic calls can pass `{ ...defaultOptions, targetHistoryDisable: true }` as their options.
+
 When the user navigates back or forward xtarget links:
 - if the target is still present on the page, the content will be loaded into the target without a full-page reload,
 - otherwise, the content will be loaded as full page.
