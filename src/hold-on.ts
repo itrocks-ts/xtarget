@@ -62,7 +62,7 @@ function ensureOverlay()
 		zIndex:          '2147483647',
 	})
 	const spinner = document.createElement('img')
-	spinner.src   = '/node_modules/@itrocks/xtarget/hold-on.svg'
+	spinner.src   = new URL('hold-on.svg', import.meta.url).href
 	Object.assign(spinner.style, {
 		height:     '96px',
 		opacity:    '0',

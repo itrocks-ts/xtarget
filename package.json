@@ -44,5 +44,5 @@
 	"scripts": {
 		"build": "tsc && node ../prepare-module/prepare-module.js && node -e \"const fs=require('node:fs'),path=require('node:path');for(const file of fs.readdirSync('src'))if(file.endsWith('.svg'))fs.copyFileSync(path.join('src',file),file)\""
 	},
-	"version": "0.5.0"
+	"version": "0.5.1"
 }
